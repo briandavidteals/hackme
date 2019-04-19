@@ -24,7 +24,12 @@ public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
     string passwordBody = data?.password;
     
     // Don't share this password with anyone!!!! 
-    string password = "1212";
+    // Oh noes! I got hacked!  now my password is much more secure, take that hackers!
+    char c1 = (char)49;
+    char c2 = (char)51;
+    char c3 = (char)49;
+    char c4 = (char)51;
+    string password = $"{c1}{c2}{c3}{c4}";
 
     if (string.IsNullOrEmpty(passwordQuery) && string.IsNullOrEmpty(passwordHeader) && string.IsNullOrEmpty(passwordBody))
     {
