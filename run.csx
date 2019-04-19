@@ -23,21 +23,22 @@ public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
     dynamic data = JsonConvert.DeserializeObject(requestBody);
     string passwordBody = data?.password;
     
-    string password = "1234";
+    // Don't share this password with anyone!!!! 
+    string password = "1212";
 
     if (string.IsNullOrEmpty(passwordQuery) && string.IsNullOrEmpty(passwordHeader) && string.IsNullOrEmpty(passwordBody))
     {
-        return new BadRequestObjectResult("Bad Request: No password was given");
+        return new BadRequestObjectResult("Welcome to HackMe.  Bad Request: No password was given. Please specify a 4-digit password pin in Query String, like https://hackthehacker.azurewebsites.net/api/HackMe418201990200?password=1234");
     }
     else
     {
         if(passwordHeader == password || passwordQuery == password || passwordBody == password)
         {
-            return (ActionResult)new OkObjectResult($"Success: You got the password {password}! here's the secret 1328328423");
+            return (ActionResult)new OkObjectResult($"Welcome to HackMe.  Success: You got the password {password}! You can restore the $1000000 in stolen bitcoin!");
         }
         else
         {
-            var result = new ObjectResult($"Forbidden: wrong password");
+            var result = new ObjectResult($"Welcome to HackMe.  Forbidden: wrong password.  Btw, valid passwords are 4 digit pins, and cannot start with the digit 0");
             result.StatusCode = 403;
             return (ActionResult)result;
         }
